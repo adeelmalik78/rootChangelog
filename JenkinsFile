@@ -6,13 +6,15 @@ pipeline {
   stages {
 
     stage('Setup Parameters') {
-      properties([
-        parameters([
-          base64File(
-            description: 'Select a script from your machine to be deployed to the database.',
-            name: 'THEFILE')
+      steps {
+        properties([
+          parameters([
+            base64File(
+              description: 'Select a script from your machine to be deployed to the database.',
+              name: 'THEFILE')
+            ])
           ])
-        ])
+      }
     }
 
     stage('Move uploaded script to DBScripts directory') {
