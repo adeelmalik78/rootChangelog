@@ -45,7 +45,7 @@ pipeline {
                       flow \
                       --flow-file=Flowfiles/liquibase-update.flowfile.yaml
         '''
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'liquibaseReport.html', reportName: 'Update_HTML_Report', reportTitles: ''])
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'liquibaseReport.html', reportName: 'Liquibase_HTML_Report', reportTitles: ''])
       }
     }
     
