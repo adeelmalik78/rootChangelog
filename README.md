@@ -31,7 +31,7 @@ NOTE: The `changelog-9.9.9.xml` points to `DBAUploads`. This enables any scripts
 ```
 
 The logic for uploading DBA scripts would be captured in a Jenkins pipeline job. 
-<img src=img/FileParameter.png width="300">
+<img src=img/FileParameter.png>
 
 # Flow files
 
