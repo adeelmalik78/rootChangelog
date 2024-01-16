@@ -10,13 +10,6 @@ pipeline {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
         withFileParameter('THEFILE') {
-            // if ($THEFILE_FILENAME == "") {
-            //     currentBuild.result = 'SUCCESS'
-            // }
-            script {
-                currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-                sleep(1)   // Interrupt is not blocking and does not take effect immediately.
-            }
             sh '''
                 if [ -z "$THEFILE_FILENAME" ]
                 then
