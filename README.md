@@ -46,3 +46,21 @@ Liquibase command to execute the flow file (`liquibase-rollback.flowfile.yaml`):
 ``` shell
 liquibase flow --flow-file=Flowfiles/liquibase-rollback.flowfile.yaml
 ```
+
+# Reports
+
+Report properites are provided in `liquibase.properties` file:
+```shell
+liquibase.reports.enabled=true
+liquibase.reports.path=reports
+liquibase.reports.name=update.report.html
+```
+
+CATION: In order for reports to render properly ...
+1. In Jenkins, go to "Manage Jenkins"
+2. Click on "Script Console"
+3. Run the following command:
+
+```
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "img-src 'self' data:;")
+```
