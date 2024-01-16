@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     DB_CREDS = credentials('PostgresCredentials')
+    PATH="/opt/liquibase/liquibase-4.25.1:$PATH"
   }
 
   stages {
@@ -22,7 +23,7 @@ pipeline {
                     echo THEFILE_FILENAME=$THEFILE_FILENAME
                     mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
                     ls -alh rootChangelog/DBAUploads
-                    // cat rootChangelog/DBAUploads/$THEFILE_FILENAME
+                    # cat rootChangelog/DBAUploads/$THEFILE_FILENAME
                 fi
             '''
         }
@@ -32,9 +33,7 @@ pipeline {
     stage('Liquibase Flow') {
       steps {
         sh '''
-            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
-            #export LIQUIBASE_COMMAND_USERNAME=$DB_CREDS_USR
-            #export LIQUIBASE_COMMAND_PASSWORD=$DB_CREDS_PWD
+            # export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
             cd rootChangelog
             liquibase --url=${DB_URL} \
                       --username=$DB_CREDS_USR \
