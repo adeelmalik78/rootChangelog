@@ -1,0 +1,78 @@
+pipeline {
+  agent any
+//   parameters {
+//     base64File 'THEFILE'
+//   }
+  stages {
+
+    stage('Move uploaded script to DBScripts directory') {
+      steps {
+        cleanWs()
+        sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
+        withFileParameter('THEFILE') {
+            sh 'ls -alh rootChangelog'
+            sh 'echo THEFILE=$THEFILE'
+            sh 'echo THEFILE_FILENAME=$THEFILE_FILENAME'
+            sh 'mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME'
+            sh 'ls -alh rootChangelog/DBAUploads'
+            // sh 'cat rootChangelog/DBAUploads/$THEFILE_FILENAME'
+        }
+      }
+    }
+
+    stage('Liquibase Quality Checks') {
+      steps {
+        sh '''
+            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            cd rootChangelog
+            liquibase checks run
+        '''
+      }
+    }
+    
+    stage('Changelog Validation') {
+      steps {
+        sh '''
+            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            cd rootChangelog
+            liquibase validate
+        '''    
+      }
+    }
+
+    stage('Liquibase Status') {
+      steps {
+        sh '''
+            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            cd rootChangelog
+            liquibase status --verbose
+        '''    
+      }
+    }    
+
+    stage('Liquibase Update') {
+      steps {
+        sh '''
+            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            cd rootChangelog
+            liquibase update
+            ls -alh
+        '''    
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'update.report.html', reportName: 'Update_HTML_Report', reportTitles: ''])
+
+      }
+    }  
+
+    stage('Liquibase History') {
+      steps {
+        sh '''
+            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            cd rootChangelog
+            liquibase history
+        '''    
+      }
+    }  
+    
+  }  // end stages
+} // end pipeline
+
