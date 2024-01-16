@@ -19,7 +19,7 @@ pipeline {
         sh '''
             export LIQUIBASE_COMMAND_REFERENCE_URL=$REFERENCE_DB_URL
             export LIQUIBASE_COMMAND_REFERENCE_USERNAME=$DB_CREDS_USR
-            export LIQUIBASE_COMMAND_REFERENCE_PASSWORS=$DB_CREDS_PSW
+            export LIQUIBASE_COMMAND_REFERENCE_PASSWORD=$DB_CREDS_PSW
             cd rootChangelog
             liquibase --url=${DB_URL} \
                       --username=$DB_CREDS_USR \
