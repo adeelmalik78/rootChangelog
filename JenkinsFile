@@ -33,10 +33,12 @@ pipeline {
       steps {
         sh '''
             export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+            // export LIQUIBASE_COMMAND_USERNAME=$DB_CREDS_USR
+            // export LIQUIBASE_COMMAND_PASSWORD=$DB_CREDS_PWD
             cd rootChangelog
             liquibase --url=${DB_URL} \
                       --username=$DB_CREDS_USR \
-                      --password=$DB_CREDS_PWD \
+                      --password=$DB_CREDS_PSW \
                       flow \
                       --flow-file=Flowfiles/liquibase-update.flowfile.yaml
         '''
