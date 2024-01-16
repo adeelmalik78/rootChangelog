@@ -10,9 +10,12 @@ stages:
   Diff:
     actions:
       - type: liquibase
-        globalArgs: { defaultsFile: "liquibase.properties" }
-        cmdArgs: { format: "json"}
         command: diff
+        globalArgs: { defaultsFile: "liquibase.properties",
+                      reference-url: "${REFERENCE_DB_URL}",
+                      reference-username: "$DB_CREDS_USR",
+                      reference-password: "$DB_CREDS_PSW" }
+        cmdArgs: { format: "json" }
 
 ## The endStage ALWAYS RUNS. 
 ## So put actions here which you desire to perform whether previous stages' actions succeed or fail.
