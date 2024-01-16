@@ -20,10 +20,18 @@ The `changelog` directory consists of multiple XML changelogs:
 ├── changelog-1.0.0.xml
 ├── changelog-1.0.1.xml
 └── changelog-1.0.2.xml
+└── changelog-9.9.9.xml
 ```
 
 Any new XML file added to the `changelog` directory will automatically be picked up by Liquibase as new changelog to be deployed.
 
+NOTE: The `changelog-9.9.9.xml` points to `DBAUploads`. This enables any scripts uploaded at runtime by DBAs (via Jenkins) be deployed to the database.
+``` xml
+    <includeAll path="./DBAUploads" />
+```
+
+The logic for uploading DBA scripts would be captured in a Jenkins pipeline job. 
+<img src=img/FileParameter.png width="300">
 
 # Flow files
 
