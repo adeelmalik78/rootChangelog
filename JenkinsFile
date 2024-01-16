@@ -18,6 +18,7 @@ pipeline {
                     echo "No file provided ...."
                     exit 0
                 else
+                    pwd
                     ls -l rootChangelog
                     echo THEFILE=$THEFILE
                     echo THEFILE_FILENAME=$THEFILE_FILENAME
