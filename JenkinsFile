@@ -18,14 +18,12 @@ pipeline {
                     echo "No file provided ...."
                     exit 0
                 else
-                    pwd
-                    ls -l rootChangelog
-                    echo THEFILE=$THEFILE
-                    echo THEFILE_FILENAME=$THEFILE_FILENAME
-                    cat $THEFILE
-                    mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
-                    ls -alh rootChangelog/DBAUploads
-                    # cat rootChangelog/DBAUploads/$THEFILE_FILENAME
+                    cd rootChangelog
+                    ls -l
+                    echo "**** THEFILE=$THEFILE **** and **** THEFILE_FILENAME=$THEFILE_FILENAME ****"
+                    mv $THEFILE DBAUploads/$THEFILE_FILENAME
+                    ls -alh DBAUploads
+                    # cat DBAUploads/$THEFILE_FILENAME
                 fi
             '''
         }
@@ -35,7 +33,6 @@ pipeline {
     stage('Liquibase Flow') {
       steps {
         sh '''
-            # export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
             cd rootChangelog
             liquibase --url=${DB_URL} \
                       --username=$DB_CREDS_USR \
