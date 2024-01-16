@@ -1,8 +1,9 @@
 pipeline {
   agent any
-//   parameters {
-//     base64File 'THEFILE'
-//   }
+  environment {
+    DB_CREDS = credentials('PostgresCredentials')
+  }
+
   stages {
 
     stage('Move uploaded script to DBScripts directory') {
@@ -33,7 +34,7 @@ pipeline {
         sh '''
             export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
             cd rootChangelog
-            liquibase flow --flow-file=Flowfiles/liquibase-update.flowfile.yaml
+            liquibase --url=${DB_URL} --username=$DB_CREDS_USR --password=$DB_CREDS_PWD flow --flow-file=Flowfiles/liquibase-update.flowfile.yaml
         '''
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'update.report.html', reportName: 'Update_HTML_Report', reportTitles: ''])
       }
