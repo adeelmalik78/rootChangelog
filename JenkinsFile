@@ -10,12 +10,20 @@ pipeline {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
         withFileParameter('THEFILE') {
-            sh 'ls -alh rootChangelog'
-            sh 'echo THEFILE=$THEFILE'
-            sh 'echo THEFILE_FILENAME=$THEFILE_FILENAME'
-            sh 'mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME'
-            sh 'ls -alh rootChangelog/DBAUploads'
-            // sh 'cat rootChangelog/DBAUploads/$THEFILE_FILENAME'
+            sh '''
+                if [ -z "$THEFILE_FILENAME" ]
+                then
+                    echo "No file provided ...."
+                    currentBuild.result = 'SUCCESS'
+                else
+                    ls -alh rootChangelog
+                    echo THEFILE=$THEFILE
+                    echo THEFILE_FILENAME=$THEFILE_FILENAME
+                    mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
+                    ls -alh rootChangelog/DBAUploads
+                    // cat rootChangelog/DBAUploads/$THEFILE_FILENAME
+                fi
+            '''
         }
       }
     }
