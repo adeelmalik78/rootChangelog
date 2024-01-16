@@ -17,6 +17,11 @@ pipeline {
                 then
                     echo "No file provided ...."
                     exit 0
+                elif [[ $THEFILE_FILENAME == *".zip" ]]
+                  then
+                    cd rootChangelog
+                    unzip $THEFILE -d DBAUploads
+                    ls -l DBAUploads
                 else
                     cd rootChangelog
                     ls -l
