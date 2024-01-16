@@ -20,58 +20,70 @@ pipeline {
       }
     }
 
-    stage('Liquibase Quality Checks') {
+    stage('Liquibase Flow') {
       steps {
         sh '''
             export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
             cd rootChangelog
-            liquibase checks run
+            liquibase flow --flow-file=Flowfiles/liquibase-update.flowfile.yaml
         '''
-      }
-    }
-    
-    stage('Changelog Validation') {
-      steps {
-        sh '''
-            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
-            cd rootChangelog
-            liquibase validate
-        '''    
-      }
-    }
-
-    stage('Liquibase Status') {
-      steps {
-        sh '''
-            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
-            cd rootChangelog
-            liquibase status --verbose
-        '''    
-      }
-    }    
-
-    stage('Liquibase Update') {
-      steps {
-        sh '''
-            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
-            cd rootChangelog
-            liquibase update
-            ls -alh
-        '''    
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'update.report.html', reportName: 'Update_HTML_Report', reportTitles: ''])
-
       }
-    }  
+    }
 
-    stage('Liquibase History') {
-      steps {
-        sh '''
-            export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
-            cd rootChangelog
-            liquibase history
-        '''    
-      }
-    }  
+
+    // stage('Liquibase Quality Checks') {
+    //   steps {
+    //     sh '''
+    //         export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+    //         cd rootChangelog
+    //         liquibase checks run
+    //     '''
+    //   }
+    // }
+    
+    // stage('Changelog Validation') {
+    //   steps {
+    //     sh '''
+    //         export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+    //         cd rootChangelog
+    //         liquibase validate
+    //     '''    
+    //   }
+    // }
+
+    // stage('Liquibase Status') {
+    //   steps {
+    //     sh '''
+    //         export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+    //         cd rootChangelog
+    //         liquibase status --verbose
+    //     '''    
+    //   }
+    // }    
+
+    // stage('Liquibase Update') {
+    //   steps {
+    //     sh '''
+    //         export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+    //         cd rootChangelog
+    //         liquibase update
+    //         ls -alh
+    //     '''    
+    //     // publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "rootChangelog/reports", reportFiles: 'update.report.html', reportName: 'Update_HTML_Report', reportTitles: ''])
+
+    //   }
+    // }  
+
+    // stage('Liquibase History') {
+    //   steps {
+    //     sh '''
+    //         export PATH=/opt/liquibase/liquibase-4.25.1:$PATH
+    //         cd rootChangelog
+    //         liquibase history
+    //     '''    
+    //   }
+    // }  
     
   }  // end stages
 } // end pipeline
