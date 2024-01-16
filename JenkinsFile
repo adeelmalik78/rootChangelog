@@ -10,13 +10,14 @@ pipeline {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
         withFileParameter('THEFILE') {
-            if ($THEFILE_FILENAME == "") {
-                currentBuild.result = 'SUCCESS'
-            }
+            // if ($THEFILE_FILENAME == "") {
+            //     currentBuild.result = 'SUCCESS'
+            // }
             sh '''
                 if [ -z "$THEFILE_FILENAME" ]
                 then
                     echo "No file provided ...."
+                    exit 0
                 else
                     ls -alh rootChangelog
                     echo THEFILE=$THEFILE
