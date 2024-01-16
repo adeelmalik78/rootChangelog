@@ -30,7 +30,7 @@ NOTE: The `changelog-9.9.9.xml` points to `DBAUploads`. This enables any scripts
     <includeAll path="./DBAUploads" />
 ```
 
-The logic for uploading DBA scripts would be captured in a Jenkins pipeline job, using a Base64 File Parameter as follows:
+The logic for uploading DBA scripts would be captured in a Jenkins pipeline job, using a Base64 File Parameter (this requires the use of [File Parameter plugin in Jenkins](https://plugins.jenkins.io/file-parameters/)):
 
 <img src=img/FileParameter.png width="450">
 
