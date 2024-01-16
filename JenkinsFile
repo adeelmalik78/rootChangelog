@@ -22,7 +22,8 @@ pipeline {
                     ls -l rootChangelog
                     echo THEFILE=$THEFILE
                     echo THEFILE_FILENAME=$THEFILE_FILENAME
-                    mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
+                    cp $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
+                    #mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
                     ls -alh rootChangelog/DBAUploads
                     # cat rootChangelog/DBAUploads/$THEFILE_FILENAME
                 fi
