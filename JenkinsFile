@@ -18,7 +18,7 @@ pipeline {
                     echo "No file provided ...."
                     exit 0
                 else
-                    ls -alh rootChangelog
+                    ls -l rootChangelog
                     echo THEFILE=$THEFILE
                     echo THEFILE_FILENAME=$THEFILE_FILENAME
                     mv $THEFILE rootChangelog/DBAUploads/$THEFILE_FILENAME
