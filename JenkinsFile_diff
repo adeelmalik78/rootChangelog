@@ -7,6 +7,13 @@ pipeline {
 
   stages {
 
+    stage('Clone Repo') {
+      steps {
+        cleanWs()
+        sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
+      }
+    }
+
     stage('Liquibase Flow') {
       steps {
         sh '''
