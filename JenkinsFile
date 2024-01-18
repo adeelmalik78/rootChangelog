@@ -48,6 +48,7 @@ pipeline {
       steps {
         sh '''
           cd rootChangelog
+          ls -alh
           # tag database
           if [[ $CR != "" ]]
           then
