@@ -31,13 +31,13 @@ pipeline {
                     cd DBAUploads
                     ls -alh
                     for FILE in *; do 
-                      echo $FILE;
-                      cat $FILE >> $FILE_TEMP
-                      echo "--liquibase formatted sql" >> $FILE
-                      echo "--changeset amalik:$CR-$FILE" > $FILE
-                      cat $FILE_TEMP > $FILE
-                      rm $FILE_TEMP
-                      cat $FILE;
+                      echo ${FILE};
+                      cat ${FILE} >> ${FILE}_TEMP
+                      echo "--liquibase formatted sql" >> ${FILE}
+                      echo "--changeset amalik:$CR-$FILE" > ${FILE}
+                      cat ${FILE}_TEMP > ${FILE}
+                      rm ${FILE}_TEMP
+                      cat ${FILE};
                     done
                     env
                     # cat DBAUploads/$THEFILE_FILENAME
