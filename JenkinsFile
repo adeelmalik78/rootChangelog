@@ -39,7 +39,6 @@ pipeline {
                       rm ${FILE}_TEMP
                       cat ${FILE};
                     done
-                    env
                     # cat DBAUploads/$THEFILE_FILENAME
                 fi
             '''
