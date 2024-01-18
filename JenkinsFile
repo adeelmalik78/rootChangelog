@@ -33,8 +33,8 @@ pipeline {
                     for FILE in *; do 
                       echo ${FILE};
                       cat ${FILE} >> ${FILE}_TEMP
-                      echo "--liquibase formatted sql" >> ${FILE}
-                      echo "--changeset amalik:$CR-$FILE" > ${FILE}
+                      cat "--liquibase formatted sql" >> ${FILE}
+                      cat "--changeset amalik:$CR-$FILE" > ${FILE}
                       cat ${FILE}_TEMP > ${FILE}
                       cat ${FILE}_TEMP
                       cat ${FILE};
