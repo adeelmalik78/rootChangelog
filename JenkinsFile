@@ -13,7 +13,7 @@ pipeline {
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
         withFileParameter('THEFILE') {
             sh '''
-                mkdir DBAUploads
+                mkdir rootChangelog/DBAUploads
                 if [ -z "$THEFILE_FILENAME" ]
                 then
                     echo "No file provided ...."
