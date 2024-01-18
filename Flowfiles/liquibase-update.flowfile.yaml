@@ -34,7 +34,7 @@ stages:
   Tag-DB:
     actions:
       - type: liquibase
-        globalArgs: { tag: "${CR}" }
+        cmdArgs: { tag: "${CR}" }
         command: tag
 
   Update:
