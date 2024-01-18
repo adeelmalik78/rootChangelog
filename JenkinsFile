@@ -42,7 +42,9 @@ pipeline {
     }
 
     stage('Liquibase Flow') {
-      when { param.THEFILE != "" }
+      when {
+        expression { params.THEFILE_FILENAME != "" }
+      }
       steps {
         sh '''
           cd rootChangelog
