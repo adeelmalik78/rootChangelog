@@ -31,13 +31,6 @@ stages:
         globalArgs: { defaultsFile: "liquibase.properties" }
         command: update-sql
 
-  Tag-DB:
-    actions:
-      - type: liquibase
-        if: "${CR} == \"*\"" # do not run tag command if CR is empty.
-        cmdArgs: { tag: "${CR}" }
-        command: tag
-
   Update:
     actions:
       - type: liquibase
