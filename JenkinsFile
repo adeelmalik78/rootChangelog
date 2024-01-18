@@ -42,8 +42,7 @@ pipeline {
     }
 
     stage('Liquibase Flow') {
-      when {
-        expression { $THEFILE_FILENAME != '' }
+      when { param.THEFILE != "" }
       }
       steps {
         sh '''
