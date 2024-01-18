@@ -35,7 +35,7 @@ pipeline {
                 ls -alh
                 for FILE in *; do 
                   echo ${FILE};
-                  cat ${FILE} >> ${FILE}_TEMP
+                  cp ${FILE} ${FILE}_TEMP
                   echo "--liquibase formatted sql" > ${FILE}
                   echo "--changeset amalik:$CR-$FILE" >> ${FILE}
                   cat ${FILE}_TEMP >> ${FILE}
