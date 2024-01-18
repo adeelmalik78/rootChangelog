@@ -34,7 +34,7 @@ stages:
   Tag-DB:
     actions:
       - type: liquibase
-        if: "${CR} != \"\"" # do not run if tag is empty.
+        if: "${CR} != \"\"" # do not run tag command if CR is empty.
         cmdArgs: { tag: "${CR}" }
         command: tag
 
