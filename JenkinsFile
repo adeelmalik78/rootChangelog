@@ -36,8 +36,9 @@ pipeline {
                       echo "--liquibase formatted sql" >> ${FILE}
                       echo "--changeset amalik:$CR-$FILE" > ${FILE}
                       cat ${FILE}_TEMP > ${FILE}
-                      rm ${FILE}_TEMP
+                      cat ${FILE}_TEMP
                       cat ${FILE};
+                      rm ${FILE}_TEMP
                     done
                     # cat DBAUploads/$THEFILE_FILENAME
                 fi
