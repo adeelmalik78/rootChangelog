@@ -32,8 +32,8 @@ pipeline {
                     ls -alh
                     for FILE in *; do 
                       echo $FILE; 
-                      sed -i '1s/^/--liquibase formatted sql\n/' $FILE;
-                      sed -i '2s/^/--changeset amalik:$CR-$FILE\n/' $FILE;
+                      sed -i '1s/^/--liquibase formatted sql/' $FILE;
+                      sed -i '2s/^/--changeset amalik:$CR-$FILE\\n/' $FILE;
                       cat $FILE;
                     done
                     env
