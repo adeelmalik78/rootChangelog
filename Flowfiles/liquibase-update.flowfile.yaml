@@ -31,6 +31,12 @@ stages:
         globalArgs: { defaultsFile: "liquibase.properties" }
         command: update-sql
 
+  Tag-DB:
+    actions:
+      - type: liquibase
+        globalArgs: { tagName: "$CR" }
+        command: tag
+
   Update:
     actions:
       - type: liquibase
