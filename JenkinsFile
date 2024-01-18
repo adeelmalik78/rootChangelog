@@ -31,9 +31,12 @@ pipeline {
                     cd DBAUploads
                     ls -alh
                     for FILE in *; do 
-                      echo $FILE; 
-                      sed -i '1s/^/--liquibase formatted sql/' $FILE;
-                      sed -i '2s/^/--changeset amalik:$CR-$FILE\\n/' $FILE;
+                      echo $FILE;
+                      cat $FILE >> $FILE_TEMP
+                      echo "--liquibase formatted sql" >> $FILE
+                      echo "--changeset amalik:$CR-$FILE" > $FILE
+                      cat $FILE_TEMP > $FILE
+                      rm $FILE_TEMP
                       cat $FILE;
                     done
                     env
