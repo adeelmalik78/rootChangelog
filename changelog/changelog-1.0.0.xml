@@ -7,9 +7,9 @@
 
 
   <changeSet author="amalik" id="sales" >
-    <sqlFile path="./DBScripts/01_sales.sql"/>
+    <sqlFile path="./DBScripts/01_sales_old.sql"/>
     <rollback>
-        <sqlFile path="./DBScripts/01_sales_rollback.sql"/>
+        <sqlFile path="./DBScripts/01_sales_old_rollback.sql"/>
     </rollback>
   </changeSet>
 
