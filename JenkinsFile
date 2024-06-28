@@ -12,40 +12,40 @@ pipeline {
       steps {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
-        withFileParameter('THEFILE') {
-            sh '''
-                mkdir rootChangelog/DBAUploads
-                if [ -z "$THEFILE_FILENAME" ]
-                then
-                    echo "No file provided ...."
-                    exit 0
-                elif [[ $THEFILE_FILENAME == *".zip" ]]
-                  then
-                    cd rootChangelog
-                    unzip $THEFILE -d DBAUploads
-                    ls -l DBAUploads
-                else
-                    cd rootChangelog
-                    ls -l
-                    echo "**** THEFILE=$THEFILE **** and **** THEFILE_FILENAME=$THEFILE_FILENAME ****"
-                    mv $THEFILE DBAUploads/$THEFILE_FILENAME
+      //   withFileParameter('THEFILE') {
+      //       sh '''
+      //           mkdir rootChangelog/DBAUploads
+      //           if [ -z "$THEFILE_FILENAME" ]
+      //           then
+      //               echo "No file provided ...."
+      //               exit 0
+      //           elif [[ $THEFILE_FILENAME == *".zip" ]]
+      //             then
+      //               cd rootChangelog
+      //               unzip $THEFILE -d DBAUploads
+      //               ls -l DBAUploads
+      //           else
+      //               cd rootChangelog
+      //               ls -l
+      //               echo "**** THEFILE=$THEFILE **** and **** THEFILE_FILENAME=$THEFILE_FILENAME ****"
+      //               mv $THEFILE DBAUploads/$THEFILE_FILENAME
 
-                    # cat DBAUploads/$THEFILE_FILENAME
-                fi
-                cd DBAUploads
-                ls -alh
-                for FILE in *; do 
-                  echo ${FILE};
-                  cp ${FILE} ${FILE}_TEMP
-                  echo "--liquibase formatted sql" > ${FILE}
-                  echo "--changeset amalik:$CR-$FILE" >> ${FILE}
-                  cat ${FILE}_TEMP >> ${FILE}
-                  cat ${FILE};
-                  rm ${FILE}_TEMP
-                done
-            '''
-        }
-      }
+      //               # cat DBAUploads/$THEFILE_FILENAME
+      //           fi
+      //           cd DBAUploads
+      //           ls -alh
+      //           for FILE in *; do 
+      //             echo ${FILE};
+      //             cp ${FILE} ${FILE}_TEMP
+      //             echo "--liquibase formatted sql" > ${FILE}
+      //             echo "--changeset amalik:$CR-$FILE" >> ${FILE}
+      //             cat ${FILE}_TEMP >> ${FILE}
+      //             cat ${FILE};
+      //             rm ${FILE}_TEMP
+      //           done
+      //       '''
+      //   }
+      // }
     }
 
     stage('Liquibase Flow') {
