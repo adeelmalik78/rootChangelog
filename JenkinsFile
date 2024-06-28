@@ -12,8 +12,8 @@ pipeline {
       steps {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
-        unstash 'THEFILE'
-        sh 'cat THEFILE'
+        unstash 'FILE2'
+        sh 'cat FILE2'
         // withFileParameter('THEFILE') {
         //     sh '''
         //         mkdir rootChangelog/DBAUploads
