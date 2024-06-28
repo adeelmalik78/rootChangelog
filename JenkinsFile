@@ -13,7 +13,7 @@ pipeline {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
         unstash 'FILE2'
-        sh cat FILE2
+        sh 'cat FILE2'
         sh '''
                 mkdir rootChangelog/DBAUploads
                 if [ -z "$FILE2_FILENAME" ]
