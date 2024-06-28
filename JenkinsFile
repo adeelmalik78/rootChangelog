@@ -12,9 +12,7 @@ pipeline {
       steps {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
-        unstash 'FILE2'
-        // sh ''
-        // sh 'cat FILE2'
+        unstash 'FILE2' // Use "Stashed File Parameter"
         sh 'mv FILE2 $FILE2_FILENAME'
         sh 'ls -alh'
         sh '''
