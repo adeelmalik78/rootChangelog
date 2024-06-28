@@ -28,7 +28,7 @@ pipeline {
                     cd rootChangelog
                     ls -l
                     echo "**** FILE2=$FILE2 **** and **** FILE2_FILENAME=$FILE2_FILENAME ****"
-                    mv $FILE2 DBAUploads/$FILE2_FILENAME
+                    mv $FILE2_FILENAME DBAUploads/$FILE2_FILENAME
 
                     # cat DBAUploads/$FILE2_FILENAME
                 fi
