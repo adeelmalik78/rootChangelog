@@ -1,7 +1,8 @@
 pipeline {
   agent any
   environment {
-    DB_CREDS = credentials('PostgresCredentials')
+    // DB_CREDS = credentials('PostgresCredentials')
+    // DB_CREDS = credentials('OracleCredentials')
     PATH="/opt/liquibase/liquibase-4.25.1:$PATH"
   }
 
