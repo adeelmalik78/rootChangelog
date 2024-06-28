@@ -12,7 +12,7 @@ pipeline {
       steps {
         cleanWs()
         sh 'git clone https://github.com/adeelmalik78/rootChangelog.git'
-        unstash 'FILE2' // Use "Stashed File Parameter"
+        unstash 'FILE2' // Use "Stashed File Parameter" - I use FILE2 as name of this parameter
         sh 'mv FILE2 $FILE2_FILENAME'
         sh 'ls -alh'
         sh '''
@@ -21,11 +21,12 @@ pipeline {
                 then
                     echo "No file provided ...."
                     exit 0
-                elif [[ $FILE2_FILENAME == *".zip" ]]
-                  then
-                    cd rootChangelog
-                    unzip $FILE2 -d DBAUploads
-                    ls -l DBAUploads
+                //  # This bit of code is untested with Stashed File Parameter
+                // elif [[ $FILE2_FILENAME == *".zip" ]]
+                //   then
+                //     cd rootChangelog
+                //     unzip $FILE2 -d DBAUploads
+                //     ls -l DBAUploads
                 else
                     cd rootChangelog
                     ls -l
