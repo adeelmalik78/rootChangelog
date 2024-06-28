@@ -19,33 +19,34 @@ stages:
       - type: liquibase
         globalArgs: { defaultsFile: "liquibase.properties" }
         command: checks run
-        cmdArgs: {checks-scope: changelog}
+        cmdArgs: { checks-settings-file: "liquibase.checks-execute-sql.conf"}
+        # cmdArgs: {checks-scope: changelog}
 
-  Status:
-    actions:
-      - type: liquibase
-        globalArgs: { defaultsFile: "liquibase.properties" }
-        command: status
-        cmdArgs: {verbose: true}
+  # Status:
+  #   actions:
+  #     - type: liquibase
+  #       globalArgs: { defaultsFile: "liquibase.properties" }
+  #       command: status
+  #       cmdArgs: {verbose: true}
 
-  Update-SQL:
-    actions:
-      - type: liquibase
-        globalArgs: { defaultsFile: "liquibase.properties" }
-        command: update-sql
+  # Update-SQL:
+  #   actions:
+  #     - type: liquibase
+  #       globalArgs: { defaultsFile: "liquibase.properties" }
+  #       command: update-sql
 
-  Update:
-    actions:
-      - type: liquibase
-        # if: "${lbCommand} == update"
-        globalArgs: { defaultsFile: "liquibase.properties" }
-        command: update
+  # Update:
+  #   actions:
+  #     - type: liquibase
+  #       # if: "${lbCommand} == update"
+  #       globalArgs: { defaultsFile: "liquibase.properties" }
+  #       command: update
 
 ## The endStage ALWAYS RUNS. 
 ## So put actions here which you desire to perform whether previous stages' actions succeed or fail.
 ## If you do not want any actions to ALWAYS RUN, simply delete the endStage from your flow file.
 
-endStage:
-  actions:
-    - type: liquibase
-      command: history
+# endStage:
+#   actions:
+#     - type: liquibase
+#       command: history
